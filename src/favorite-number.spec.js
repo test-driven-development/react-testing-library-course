@@ -8,9 +8,3 @@ test('invalid value shows error message', () => {
   fireEvent.change(input, {target: {value: '10'}})
   expect(getByRole('alert')).toHaveTextContent(/the number is invalid/i)
 })
-
-test('renders', () => {
-  const {getByLabelText} = render(<FavoriteNumber />)
-  const input = getByLabelText(/favorite number/i)
-  expect(input).toHaveAttribute('type', 'number')
-})
