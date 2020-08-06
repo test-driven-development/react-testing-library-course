@@ -21,17 +21,15 @@ function ThrowError({shouldThrow}) {
 
 test('calls error boundary', () => {
   reportError.mockResolvedValueOnce({success: true})
-  const {rerender, getByText, getByRole, queryByRole, queryByText} = render(
-    <ErrorBoundary>
-      <ThrowError />
-    </ErrorBoundary>,
-  )
+  const {
+    rerender,
+    getByText,
+    getByRole,
+    queryByRole,
+    queryByText,
+  } = render(<ThrowError />, {wrapper: ErrorBoundary})
 
-  rerender(
-    <ErrorBoundary>
-      <ThrowError shouldThrow={true} />
-    </ErrorBoundary>,
-  )
+  rerender(<ThrowError shouldThrow={true} />)
 
   expect(reportError).toHaveBeenCalledTimes(1)
   expect(reportError).toHaveBeenCalledWith(expect.any(Error), expect.anything())
@@ -44,11 +42,7 @@ test('calls error boundary', () => {
   console.error.mockClear()
   reportError.mockClear()
 
-  rerender(
-    <ErrorBoundary>
-      <ThrowError />
-    </ErrorBoundary>,
-  )
+  rerender(<ThrowError />)
 
   fireEvent.click(getByText(/try again/i))
 
