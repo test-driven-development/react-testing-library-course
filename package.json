@@ -76,6 +76,7 @@
   },
   "homepage": "https://github.com/kentcdodds/react-testing-library-course#readme",
   "devDependencies": {
+    "dependency-cruiser": "^9.9.5",
     "testdouble": "^3.16.1",
     "testdouble-jest": "^2.0.0"
   }
