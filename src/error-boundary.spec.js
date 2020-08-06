@@ -4,6 +4,15 @@ import {ErrorBoundary} from './error-boundary'
 import {reportError} from './api'
 
 jest.mock('./api')
+let spyInstance
+beforeAll(() => {
+  spyInstance = jest.spyOn(console, 'error').mockImplementation(() => {})
+})
+
+afterAll(() => {
+  spyInstance.mockRestore()
+})
+
 afterEach(() => {
   jest.restoreAllMocks()
 })
@@ -30,4 +39,5 @@ test('calls error boundary', () => {
 
   expect(reportError).toHaveBeenCalledTimes(1)
   expect(reportError).toHaveBeenCalledWith(expect.any(Error), expect.anything())
+  expect(console.error).toHaveBeenCalledTimes(2)
 })
