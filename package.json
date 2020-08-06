@@ -5,10 +5,10 @@
   "description": "Course material for testing React components using react-testing-library",
   "main": "index.js",
   "scripts": {
-    "test": "kcd-scripts test --watchAll",
     "lint": "kcd-scripts lint",
     "validate": "kcd-scripts validate",
-    "setup": "npm install --silent && npm run validate --silent"
+    "setup": "npm install --silent && npm run validate --silent",
+    "test": "kcd-scripts test --watchAll"
   },
   "keywords": [],
   "author": "Kent C. Dodds <kent@doddsfamily.us> (http://kentcdodds.com/)",
