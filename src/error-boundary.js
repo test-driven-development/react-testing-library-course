@@ -5,6 +5,7 @@ class ErrorBoundary extends React.Component {
   state = {hasError: false}
   componentDidCatch(error, info) {
     this.setState({hasError: true})
+    // noinspection JSIgnoredPromiseFromCall
     reportError(error, info)
   }
   tryAgain = () => this.setState({hasError: false})
