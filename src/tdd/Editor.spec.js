@@ -1,11 +1,19 @@
-/* eslint-disable testing-library/prefer-explicit-assert */
+/* eslint-disable testing-library/prefer-explicit-assert,testing-library/prefer-wait-for */
 import React from 'react'
-import {render, fireEvent} from '@testing-library/react'
+import {Redirect} from 'react-router'
+import {render, fireEvent, wait} from '@testing-library/react'
 import {Editor} from './Editor'
 import {savePost} from './api'
 
+jest.mock('react-router', () => {
+  return {
+    Redirect: jest.fn(() => null),
+  }
+})
+
 jest.mock('./api')
-test('Editor is a form with title, content, tags and submit button', () => {
+
+test('Editor is a form with title, content, tags and submit button', async () => {
   savePost.mockResolvedValueOnce()
   const user = {id: 'user'}
   const post = {
@@ -24,4 +32,7 @@ test('Editor is a form with title, content, tags and submit button', () => {
   fireEvent.click(submitButton)
   expect(submitButton).toBeDisabled()
   expect(savePost).toHaveBeenCalledWith({...post, authorId: user.id})
+
+  await wait(() => expect(Redirect).toHaveBeenCalledWith({to: '/'}, {}))
+  expect(Redirect).toHaveBeenCalledTimes(1)
 })
