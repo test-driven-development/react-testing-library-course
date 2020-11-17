@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import {savePost} from './api'
 
 function Editor({user}) {
@@ -9,7 +9,7 @@ function Editor({user}) {
     const newPost = {
       title: title.value,
       content: content.value,
-      tags: tags.value.split(',').map(t => t.trim()),
+      tags: tags.value.split(',').map((t) => t.trim()),
       authorId: user.id,
     }
     setIsSaving(true)
